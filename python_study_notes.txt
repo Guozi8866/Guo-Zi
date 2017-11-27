@@ -1,0 +1,520 @@
+# encoding=utf-8
+
+数据类型
+	整数
+		十六进制：Ox前缀，0-9、a-f表示。
+	浮点数
+		1.23e9
+	字符串
+		'' 或""
+	布尔值
+		可通过and、or、not运算
+	空值
+		None
+
+print语句
+	print'...','...'
+	遇到‘，’会输出空格
+	print 100+200
+	print '...',a
+
+注释
+	#这一行是注释
+	print 'hhh'#这里是注释
+
+变量
+	大小写英文、数字和下划线的组合，不能用数字开头
+
+转义字符
+	\'	\"	\n	\t	\\
+
+多行字符串
+	'''Line 1
+	Line 2
+	Line 3'''
+	
+	还可以在多行字符串前面添加 r ，把这个多行字符串也变成一个raw字符串(不需要进行转义)：
+	r'''Line 1
+	Line 2
+	Line 3'''
+
+中文字符串
+	u'中文\n日文\n韩文'
+
+	u'''第一行
+	第二行'''
+
+	ur'''Python的Unicode字符串支持"中文",
+	"日文",
+	"韩文"等多种语言'''
+
+	如果中文字符串遇到UnicodeDecodeError，在第一行加入注释：
+	# -*- coding: utf-8 -*-
+
+list(列表)
+	有序集合，可以随时添加和删除其中的元素
+	['Michael', 'Bob', 'Tracy']
+
+	L = ['Michael', 100, True]
+
+	empty_list = []
+
+	索引查询
+	L = ['Michael', 100, True]
+	L[0] = 'Michael'
+	L[-1] = True
+
+	添加元素
+	L = ['a','b','c']
+	L.append('d')
+	L = ['a','b','c','d'] # append 将元素加到list的尾部
+
+	L = ['a','b','c']
+	L.insert(0,'d')
+	L = ['d','a','b','c'] # insert 将接收两个参数，分别为索引号和待添加的元素
+
+	删除元素
+	L = ['a','b','c']
+	L.pop()
+	L = ['a','b'] # pop() 将list的最后一个元素删除，并且会返回这个元素
+	
+	L = ['a','b','c']
+	L.pop(1)
+	L = ['a','c'] # pop(n) 将list中索引为n的元素删除并返回
+
+tuple(元组)
+	有序列表，不能修改
+	t = ('Adam', 'Lisa', 'Bart')
+
+	单元素元组
+	t = (1,) # 与(1)进行区分，避免被误判为整数、字符串等
+
+	将tuple和list进行结合
+	t = ('a', 'b', ['A', 'B'])
+	可通过
+		L = t[2]
+		L[0] = 'X'
+		L[1] = 'Y'
+	得到
+		t = ('a', 'b', ['X', 'Y'])
+
+if语句
+	age = 20
+	if age >= 18:
+    	    print 'your age is', age
+    	    print 'adult'
+	
+	print 'END'
+
+	缩进请严格按照Python的习惯写法：
+	4个空格，不要使用Tab，更不要混合Tab和空格，否则很容易造成因为缩进引起的语法错误。
+	注意: if 语句后接表达式，然后用:表示代码块开始。
+
+	if age >= 18:
+    	    print 'adult'
+	else:
+   	    print 'teenager'
+
+	if age >= 18:
+	    print 'adult'
+	elif age >= 6:
+	    print 'teenager'
+	elif age >= 3:
+	    print 'kid'
+	else:
+	    print 'baby'
+
+for语句
+	L = ['Adam', 'Lisa', 'Bart']
+	for name in L:
+	    print name	
+
+while语句
+	N = 10
+	x = 0
+	while x < N:
+	    print x
+	    x = x + 1
+
+break语句
+	跳出循环
+
+continue语句
+	跳过循环内剩余语句，直接进行下次循环
+
+dict查找表
+	无序集合。包含key和value两个参数，通过key查找value。
+	查找速度快，key不能重复。
+	key必须不可变
+	
+	d = {
+	    'Adam': 95,
+	    'Lisa': 85,
+	    'Bart': 59
+	}	
+
+	len（d） # 计算任意集合的大小
+
+	print d['Adam']
+	95 # 通过key查找value
+
+	if 'Paul' in d:
+	    print d['Paul'] # 通过in判断key是否在dict查找表中
+
+	print d.get('Paul')
+	None # get方法，在key不存在时返回None
+
+	添加元素
+	d['Paul'] = 72
+	d = {'Lisa': 85, 'Paul': 72, 'Adam': 95, 'Bart': 59}
+	# 如果 key 已经存在，则赋值会用新的 value 替换掉原来的 value
+
+set
+	set 持有一系列元素，但是set的元素没有重复，而且是无序的，无法用索引来访问
+
+	s = set(['A', 'B', 'C'])
+
+	set会自动去掉重复的元素
+
+	set对大小写有要求，'bart'和'Bart'被认为是两个不同的元素
+
+	应用：
+		x = '???' # 用户输入的字符串
+		if x in weekdays:
+		    print 'input ok'
+		else:
+		    print 'input error'
+
+	遍历set
+	for name in s:
+	    print name
+
+	更新set：
+	添加：
+	s = set([1, 2, 3])
+	s.add(4) # 如果传入重复元素，不会报错，但是不会加进去了
+	删除：
+	s.remove(4) # 使用前需要先判断元素是否在set中，如果不在会报错
+
+函数
+	定义一个函数要使用 def 语句，依次写出函数名、括号、括号中的参数和冒号:
+	然后，在缩进块中编写函数体，函数的返回值用 return 语句返回。
+
+	def my_abs(x):
+	    if x >= 0:
+	        return x
+	    else:
+	        return -x
+	
+	# math包提供了sin()和 cos()等函数，我们先用import引用它
+
+	函数参数默认值：
+	def power(x, n=2):
+	    s = 1
+	    while n > 0:
+	        n = n - 1
+	        s = s * x
+	    return s
+
+	可变参数
+	def average(*args):
+	    ...
+
+list切片
+	L = ['Adam', 'Lisa', 'Bart', 'Paul']
+	L[0:3] = ['Adam', 'Lisa', 'Bart'] # 按照索引切片
+	L[::2] = ['Adam', 'Bart'] # 第三个参数表示 每隔几个取一个。
+	
+	倒序切片：
+	 L[-2:] = ['Bart', 'Paul']
+
+	字符串切片：
+	原理相同
+
+enumerate()函数
+	for index, name in enumerate(L):
+	    print index, '-', name
+	# 0 - Adam
+	# 1 - Lisa
+	# 2 - Bart
+	# 3 - Paul
+
+values()方法
+	迭代dict的value值
+	d = { 'Adam': 95, 'Lisa': 85, 'Bart': 59 }
+	print d.values()
+	# [85, 95, 59]
+	for v in d.values():
+	    print v
+	# 85
+	# 95
+	# 59
+
+item()方法
+	同时迭代 dict 的key和value
+	d = { 'Adam': 95, 'Lisa': 85, 'Bart': 59 }
+	print d.items()
+	[('Lisa', 85), ('Adam', 95), ('Bart', 59)]
+
+	for key, value in d.items():
+	print key, ':', value
+	
+	# Lisa : 85
+	# Adam : 95
+	# Bart : 59
+
+range()
+	range(1, 11)
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+	range(1, 100, 2) 
+	[1, 3, 5, 7, 9,...]
+
+	[x * x for x in range(1, 11)]
+	[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+	[x * x for x in range(1, 11) if x % 2 == 0]
+	[4, 16, 36, 64, 100]
+
+math.sqrt() # 求平方根
+
+map(f,L) # 通过把函数f一次作用在list的每一个元素上，得到新的list并返回。
+
+capitalize() # 首字母大写，其余小写
+	s.capitalize() 
+upper() # 全部大写
+	s.upper()
+lower() # 全部小写 
+	s.lower()
+title() # 标题首字母大写
+	s.title()
+
+	输入：['adam', 'LISA', 'barT']
+	输出：['Adam', 'Lisa', 'Bart']
+	
+	三种方法：1、s.capitalize（）
+	2、s[0].upper s[1:].lower
+	3、s.title()
+
+函数式编程：
+
+map()
+
+	def format_name(s):
+
+	    return s.capitalize()
+	
+
+print map(format_name, ['adam', 'LISA', 'barT'])
+
+reduce()
+	其中传入的函数必须接受两个参数
+	def prod(x, y):
+
+	    return x+y
+	
+
+print reduce(prod, [1, 3, 5, 7, 9],100)
+	# 100+1 = 101
+	# 101+3 = 104
+	# 104+5 = 109
+	# 109+7 = 116
+	# 116+9 = 125
+
+filter()
+	接受一个函数f和一个list，对每个元素进行判断，返回True或False
+	根据判断结果过滤不符合条件的元素，返回由符合条件元素组成的新list
+	
+	import math
+	
+
+def is_sqr(x):
+	
+    return math.sqrt(x)%1.0 == 0
+	
+
+print filter(is_sqr, range(1,101))
+	# [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+sorted()
+	对list进行排序
+	正序：
+	sorted([36, 5, 12, 9, 21])
+	# [5, 9, 12, 21, 36]
+
+	倒序：
+	def reversed_cmp(x, y):
+   	    if x > y:
+	        return -1
+	    if x < y:
+	        return 1
+	    return 0
+	sorted([36, 5, 12, 9, 21], reversed_cmp)
+	# [36, 21, 12, 9, 5]
+
+函数返回函数
+	def calc_sum(lst):
+	    def lazy_sum():
+	        return sum(lst)
+	    return lazy_sum
+	f = calc_sum([1, 2, 3, 4])
+	f	# <function lazy_sum at 0x1037bfaa0>
+	f()	# 10
+
+导入模块
+	不同py文件中有相同名称的函数，可通过导入模块进行调用。
+	如果有相同文件名的py文件，可通过导入不同的包来进行调用，每个包下需要有__init__.py文件，注意！每层都要有！
+	import math	#导入math模块
+
+	try:
+	    from cStringIO import StringIO	#用c编写的方法
+	except ImportError:
+	    from StringIO import StringIO	#用python编写的方法
+	#通过该方法，先尝试导入用c编写的方法，如果失败再导入python编写的方法
+
+class类
+	class Person(object):	#object是基本类
+	    pass
+	xiaoming = Person()
+	xiaoming.name = "Xiao Ming"	#可以直接给实例绑定各种属性
+	xiaoming.age = 19
+
+	class Person(object):	#创建的时候定义属性
+	    def __init__(self,name,age,sex):	#第一个参数必须是self
+	        self.name = name
+		self._age = age	#单下划线虽然可以被访问，但是按照习惯，他们不应该被外部访问
+		self.__sex = sex	#双下划线开头，该属性就无法被外部访问
+
+	给类绑定一个属性，属性属于该类模版，所以所有实例访问的都是同样的类属性。
+	class Person(object):
+	    address = 'Earth'
+	    def __init__(self, name):
+		self.name = name
+
+	print.address	#Earth
+
+	Person.address = "China"	#动态改变类属性
+	print.address	#China
+
+	实例方法：
+	def get_name(self):
+	    return self.__name
+
+	类方法
+	@classmethod
+	def how_many(cls):
+	    return cls.count
+	print Person.how_many()
+	通过@classmethod将该方法绑定到Person类上。通常将参数名命名为cls。
+
+继承
+	calss Person(object):
+	    def __init__(self, name, gender):
+		self.name = name
+		self.gender = gender
+	class Student(Person):
+	    def __init__(self, name, gender, score):
+		super(Student, self).__init__(name, gender)	#通过该语句将父类初始化，在__init__()中已经隐性传递，不需要也不能写self
+		self.score = score
+
+	s = Student("Bob","Male", 88)
+	isinstance(s,Student)	#True	#判断类型
+	isinstance(s,Person)	#True
+
+	type(s)	#<class '__main__.Student'>	#判断对象类型
+	
+特殊方法	#自动调用，如果是有关联的特殊方法，定义一个就得全部定义。
+	print：	__str__()
+	len:	__len__()
+	.....
+	
+	class Person(object):
+	    def __init__(self, name, gender):
+	        self.name = name
+	        self.gender = gender
+	    def __str__(self):
+	        return '(Person: %s, %s)' % (self.name, self.gender)
+	p = Person('Bob', 'male')
+	print p	#(person:Bob, male)	#自动调用__str__()方法
+	p	#<main.Person object at 0x10c941890>	#自动调用__repr__()方法
+
+	__slots__()	#一个类允许的属性列表
+
+	class Student(object):
+	    __slots__ = ('name', 'gender', 'score')	
+	    def __init__(self, name, gender, score):
+	        self.name = name
+	        self.gender = gender
+	        self.score = score
+	
+
+
+
+
+
+
+
+常用模块:
+
+numpy************************************
+ndarray	
+	# import numpy as np
+	lst = [[1,3,5],[2,4,6]]
+	print(type(lst))	#lst
+	np_lst = np_array(lst)	#array numpy的基本数据结构,其中只能有一种数据类型
+	print(type(np_lst))	#numpy.ndarray
+	np_lst = np.array(lst,dtype=np.float)	#定义array的数据类型为float
+	print(np_lst,shape)	#2L 3L #两行三列
+	print(np_lst,ndim)	#2 #维数
+	print(np_lst,dtype)	#数据类型
+	print(np_lst,itemsize)	#每个元素的大小
+	print(np_lst,size)	#大小，元素数目
+
+常用数组
+	print(np.zeros([2,4]))	#数据初始化，两行四列均为0的矩阵
+	print(np.zeros([3,5]))	#三行五列均为1的矩阵
+	print(np.random.rand(2,4))	#两行四列随机数矩阵
+	print(np.random.randint(1,10,3))	#生成3个1到10之间的随机整数
+	print(np.random.randn(2,4))	#两行四列正态分布随机数
+	print(np.random.shoice([10,20,30]))	#从列表中随机选择一个数
+	print(np.random.beta(1,10,100))	#1到10中生成100个beta分布的数
+	
+操作
+	print(np.arange(1,11),reshape([2,5]))	#1到11（不包括）生成数组，两行五列
+
+
+matplotlib***************************
+绘图库
+Line
+	# import matplotlib.pyplot as plt
+	x = np.linespace(-np.pi, np.pi, 256, endpoint=True)	#从-pi到pi，包含256个点，包括最后一个点
+	c, s = np.cos(x), np.sin(x)	#s,c分别是正弦、余弦函数
+	plt.figure(1)	#第一个图
+	plt.plot(x,c,"r*",label="sin")	#绘制自变量为x因变量为c的图，红色，点形线，label为sin
+	plt.plot(x,s,color="green",linewidth=1.0, linestyle="-", labe="cos", alpha=0.5)	#线为绿色,线宽1.0，直线，标签cos，透明度0.5
+	plt.title("cos&sin")	#标题
+	ax = plt.gca()	#坐标轴的编辑器
+	ax.spines["right"].set_color("none")	#右边的轴隐藏
+	ax.spines["top"].set_color("none")	#上边的轴隐藏
+	ax.spines["left"].set_position(("data",0))	#将左边的轴放在数据的0位置
+	ax.spines["bottom"].set_position(("data",0))	#将下边的轴放在数据的0位置
+	ax.xaxis.set_ticks_position("bottom")	#坐标放在x轴下面
+	ax.yaxis.set_ticks_position("left")	#坐标放在y轴左边
+	plt.yticks(np.linspace(-1,1,5,endpoint=True))	#y轴坐标从-1到1，一共标5个点，包括最后一个点
+	for label in ax.get_xticklabels()+ax.get_yticklabels():	#通过循环得到x、y坐标轴的所有坐标
+	    label.set_fontsize(16)	#将坐标的字号设置为16
+	    label.set_bbox(dict(facecolor="write",edgecolor="None",alpha=0.2))	#把每个坐标放在一个盒子里，背景颜色为白色，边缘颜色不要，透明度0.2
+	plt.legent(loc="upper left")	#图式说明，位置在左上角
+	plt.legend()	#网格线
+	plt.axis([-1,1,-0.5,1])	#设定图的显示范围，x从-1到1，y从-0.5到1
+	plt.show	#显示图
+	
+
+scipy**************************************
+
+
+
+
+
+
+
